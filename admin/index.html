@@ -7,81 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        /* Estilos adicionales específicos para esta página */
+        /* Estilos adicionales para la tabla de trámites */
         body {
             background-color: #e9ecef;
         }
 
         .admin-container {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
         }
 
-        .admin-header {
-            text-align: center;
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-
-        .admin-user-info {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-        }
-
-        .admin-user-profile {
-            display: flex;
-            align-items: center;
-        }
-
-        .admin-user-profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-left: 10px;
-        }
-
-        .admin-user-profile span {
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        .admin-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        .admin-access-denied {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .admin-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .admin-list-item {
+        .tramites-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
             background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .admin-list-item strong {
+        .tramites-table th, .tramites-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .tramites-table th {
+            background-color: #f2f2f2;
             font-weight: bold;
-            color: #007bff;
+        }
+
+        .tramite-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-accept, .btn-deny {
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: none;
+            color: white;
+        }
+
+        .btn-accept {
+            background-color: #28a745;
+        }
+
+        .btn-accept:hover {
+            background-color: #1e7e34;
+        }
+
+        .btn-deny {
+            background-color: #dc3545;
+        }
+
+        .btn-deny:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -102,9 +85,21 @@
 
         <div id="adminContent" style="display:none;">
             <p class="admin-message">Aquí podrás ver y gestionar los trámites enviados por los ciudadanos.</p>
-            <h2>Trámites Recientes</h2>
-            <ul class="admin-list" id="tramiteList">
-                </ul>
+            <h2>Trámites Pendientes</h2>
+            <table class="tramites-table" id="tramiteTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo de Trámite</th>
+                        <th>Usuario</th>
+                        <th>Fecha de Envío</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tramiteList">
+                        </tbody>
+            </table>
         </div>
     </div>
 
@@ -112,6 +107,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const accessDeniedDiv = document.getElementById('accessDenied');
             const adminContentDiv = document.getElementById('adminContent');
+            const tramiteTable = document.getElementById('tramiteTable');
             const tramiteList = document.getElementById('tramiteList');
             const adminUserProfileDiv = document.getElementById('adminUserProfile');
             const adminUserAvatarImg = document.getElementById('adminUserAvatar');
@@ -119,9 +115,8 @@
             const storedAuthTokenAdmin = localStorage.getItem('authToken'); // Ejemplo básico
 
             if (storedAuthTokenAdmin) {
-                // ** Aquí deberías hacer una petición al backend para verificar el rol del usuario
-                // basado en el authToken y obtener los datos del usuario y los trámites. **
-                // Esto es solo una simulación:
+                // ** Aquí DEBERÍAS hacer una petición real a tu backend para verificar el rol
+                // y obtener los datos del usuario y los trámites PENDIENTES. **
                 const mockAdminUser = { roles: ['carabinero'], username: 'AdminUsuario', avatarUrl: 'https://via.placeholder.com/40/0000FF/FFFFFF?Text=CA' };
                 if (mockAdminUser.roles && mockAdminUser.roles.includes('carabinero')) {
                     adminContentDiv.style.display = 'block';
@@ -129,20 +124,63 @@
                     adminUserAvatarImg.src = mockAdminUser.avatarUrl;
                     adminUserNameSpan.textContent = mockAdminUser.username;
 
-                    // Simulación de datos de trámites
-                    const tramitesSimulados = [
-                        { tipo: 'Hurto Simple', usuario: 'Ciudadano123' },
-                        { tipo: 'Robo de Vehiculo', usuario: 'Usuario456' },
-                        { tipo: 'Estafa', usuario: 'OtroUsuario' },
-                        { tipo: 'Reclamo', usuario: 'Quejoso789' }
-                        // Agrega más trámites simulados aquí
+                    // ** Simulación de datos de trámites PENDIENTES (esto vendría del backend) **
+                    const tramitesPendientes = [
+                        { id: 1, tipo: 'Hurto Simple', usuario: 'Ciudadano123', fecha: '2025-05-31', estado: 'Pendiente' },
+                        { id: 2, tipo: 'Robo de Vehiculo', usuario: 'Usuario456', fecha: '2025-05-30', estado: 'Pendiente' },
+                        { id: 3, tipo: 'Estafa', usuario: 'OtroUsuario', fecha: '2025-05-29', estado: 'Pendiente' }
+                        // Agrega más trámites pendientes aquí
                     ];
-                    tramitesSimulados.forEach(tramite => {
-                        const listItem = document.createElement('li');
-                        listItem.classList.add('admin-list-item');
-                        listItem.innerHTML = `<strong>Tipo:</strong> ${tramite.tipo} - <strong>Enviado por:</strong> ${tramite.usuario}`;
-                        tramiteList.appendChild(listItem);
-                    });
+
+                    function renderTramites(tramites) {
+                        tramiteList.innerHTML = ''; // Limpiar la tabla
+                        tramites.forEach(tramite => {
+                            const row = tramiteList.insertRow();
+                            row.insertCell().textContent = tramite.id;
+                            row.insertCell().textContent = tramite.tipo;
+                            row.insertCell().textContent = tramite.usuario;
+                            row.insertCell().textContent = tramite.fecha;
+                            row.insertCell().textContent = tramite.estado;
+                            const actionsCell = row.insertCell();
+                            const acceptButton = document.createElement('button');
+                            acceptButton.textContent = 'Aceptar';
+                            acceptButton.classList.add('btn-accept');
+                            acceptButton.addEventListener('click', () => handleAcceptTramite(tramite.id));
+
+                            const denyButton = document.createElement('button');
+                            denyButton.textContent = 'Denegar';
+                            denyButton.classList.add('btn-deny');
+                            denyButton.addEventListener('click', () => handleDenyTramite(tramite.id));
+
+                            actionsCell.appendChild(acceptButton);
+                            actionsCell.appendChild(denyButton);
+                        });
+                    }
+
+                    renderTramites(tramitesPendientes);
+
+                    function handleAcceptTramite(tramiteId) {
+                        console.log(`Aceptar trámite con ID: ${tramiteId}`);
+                        // ** Aquí DEBERÍAS hacer una petición al backend para marcar el trámite como aceptado. **
+                        // fetch('/api/tramites/' + tramiteId + '/aceptar', { method: 'POST' })
+                        //   .then(response => response.json())
+                        //   .then(data => {
+                        //     // Actualizar la tabla o mostrar un mensaje
+                        //     console.log(data);
+                        //   });
+                    }
+
+                    function handleDenyTramite(tramiteId) {
+                        console.log(`Denegar trámite con ID: ${tramiteId}`);
+                        // ** Aquí DEBERÍAS hacer una petición al backend para marcar el trámite como denegado. **
+                        // fetch('/api/tramites/' + tramiteId + '/denegar', { method: 'POST' })
+                        //   .then(response => response.json())
+                        //   .then(data => {
+                        //     // Actualizar la tabla o mostrar un mensaje
+                        //     console.log(data);
+                        //   });
+                    }
+
                 } else {
                     accessDeniedDiv.style.display = 'block';
                     setTimeout(() => {
