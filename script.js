@@ -8,47 +8,67 @@ document.addEventListener('DOMContentLoaded', function() {
     const tramiteLinks = document.querySelectorAll('.tramites-grid .clave-unica-btn.require-login');
 
     // ** TU URL DE AUTORIZACIÓN DE DISCORD **
-    const discordAuthUrl = 'https://discord.com/oauth2/authorize?client_id=1377883012552986726&redirect_uri=https%3A%2F%2Ftu-sitio-web.com%2Fcallback&response_type=code&scope=identify%20guilds.join';
+    const discordAuthUrl = 'https://discord.com/oauth2/authorize?client_id=TU_CLIENT_ID&redirect_uri=TU_REDIRECT_URI&response_type=code&scope=identify'; // Reemplaza con tus datos
 
-    // Simulación de número de denuncias (esto vendría de tu backend)
-    let denunciaCount = 0;
+    // Inicializar el contador de denuncias desde localStorage o cero
+    let denunciaCount = localStorage.getItem('denunciaCount') ? parseInt(localStorage.getItem('denunciaCount')) : 0;
+    updateDenunciaCount();
+
     function updateDenunciaCount() {
         denunciaCountElement.textContent = denunciaCount;
+        localStorage.setItem('denunciaCount', denunciaCount);
     }
-    const intervalId = setInterval(() => {
-        if (denunciaCount < 5) {
-            denunciaCount++;
-            updateDenunciaCount();
-        } else {
-            clearInterval(intervalId);
-        }
-    }, 1000);
 
-    // Función para verificar si el usuario está autenticado (ahora depende de tu backend)
+    // Función para simular el incremento de denuncias (ejemplo)
+    function simulateNewDenuncia() {
+        denunciaCount++;
+        updateDenunciaCount();
+    }
+
+    // Simulación de nuevas denuncias cada cierto tiempo (solo para demostración)
+    // setInterval(simulateNewDenuncia, 5000);
+
+    // Función para verificar si el usuario está autenticado (simulación con localStorage)
     function isUserLoggedIn() {
-        // Aquí deberías verificar si el usuario tiene una sesión válida
-        // (por ejemplo, comprobando si hay una cookie de sesión o un token en localStorage).
-        return localStorage.getItem('authToken') !== null; // Ejemplo básico con localStorage
+        return localStorage.getItem('discordUser') !== null;
+    }
+
+    // Función para obtener la información del usuario de Discord (simulación)
+    function getDiscordUser() {
+        const userJson = localStorage.getItem('discordUser');
+        return userJson ? JSON.parse(userJson) : null;
     }
 
     // Función para actualizar la interfaz de autenticación
-    function updateAuthUI(userData) {
-        if (userData) {
-            loginBtn.classList.add('hidden');
+    function updateAuthUI(user) {
+        if (user) {
+            loginBtn.style.display = 'none';
             userProfileDiv.classList.remove('hidden');
-            userAvatarImg.src = userData.avatarUrl; // Muestra la imagen del usuario
-            userNameSpan.textContent = userData.username;
+            userAvatarImg.src = user.avatarUrl || 'default-avatar.png'; // Usa una imagen por defecto si no hay avatar
+            userNameSpan.textContent = user.username;
         } else {
-            loginBtn.classList.remove('hidden');
+            loginBtn.style.display = 'inline-block';
             userProfileDiv.classList.add('hidden');
             userAvatarImg.src = '';
             userNameSpan.textContent = '';
         }
     }
 
-    // Función para simular el cierre de sesión (debería comunicarse con el backend para invalidar la sesión)
+    // Función para simular el inicio de sesión con Discord
+    function simulateDiscordLogin() {
+        const mockUser = {
+            id: '123456789',
+            username: 'UsuarioEjemplo#1234',
+            avatarUrl: 'https://via.placeholder.com/30/007bff/FFFFFF?Text=UE' // URL de un avatar de ejemplo
+        };
+        localStorage.setItem('discordUser', JSON.stringify(mockUser));
+        updateAuthUI(mockUser);
+        attachTramiteListeners();
+    }
+
+    // Función para simular el cierre de sesión
     function simulateLogout() {
-        localStorage.removeItem('authToken'); // Ejemplo básico con localStorage
+        localStorage.removeItem('discordUser');
         updateAuthUI(null);
         window.location.href = './';
     }
@@ -75,71 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listeners
     loginBtn.addEventListener('click', () => {
-        window.location.href = discordAuthUrl; // Redirigir a la URL de Discord al hacer clic
+        // En una implementación real, aquí redirigirías a la URL de autorización de Discord
+        // window.location.href = discordAuthUrl;
+        simulateDiscordLogin(); // Para la simulación
     });
     logoutBtn.addEventListener('click', simulateLogout);
 
-    // Inicialización: verificar si hay una sesión al cargar la página
-    const authToken = localStorage.getItem('authToken'); // Ejemplo básico con localStorage
-    if (authToken) {
-        // ** Aquí deberías hacer una petición a tu backend para obtener la información del usuario
-        // basada en el authToken y luego llamar a updateAuthUI con esos datos. **
-        // Esto es solo una simulación para mostrar cómo se usaría updateAuthUI:
-        const mockUserData = {
-            username: 'NombreDeUsuario',
-            avatarUrl: 'https://cdn.discordapp.com/avatars/ID_DEL_USUARIO/HASH_DEL_AVATAR.png' // Reemplaza con la lógica real
-        };
-        updateAuthUI(mockUserData);
-        attachTramiteListeners();
-    } else {
-        attachTramiteListeners();
-    }
-
-    // --- Lógica específica para la página del panel de administración (admin/index.html) ---
-    if (window.location.pathname.indexOf('admin') > -1) {
-        const accessDeniedDiv = document.getElementById('accessDenied');
-        const adminContentDiv = document.getElementById('adminContent');
-        const tramiteList = document.getElementById('tramiteList');
-        const storedAuthTokenAdmin = localStorage.getItem('authToken'); // Ejemplo básico
-
-        if (storedAuthTokenAdmin) {
-            // ** Aquí deberías hacer una petición al backend para verificar el rol del usuario
-            // basado en el authToken y obtener los trámites. **
-            // Esto es solo una simulación:
-            const mockAdminUser = { roles: ['carabinero'], username: 'AdminUsuario', avatarUrl: 'url_admin_avatar' };
-            if (mockAdminUser.roles && mockAdminUser.roles.includes('carabinero')) {
-                adminContentDiv.style.display = 'block';
-                // Simulación de datos de trámites
-                const tramitesSimulados = [
-                    { tipo: 'Hurto Simple', usuario: 'Ciudadano123' },
-                    { tipo: 'Robo de Vehiculo', usuario: 'Usuario456' },
-                    { tipo: 'Estafa', usuario: 'OtroUsuario' },
-                    { tipo: 'Reclamo', usuario: 'Quejoso789' }
-                ];
-                tramitesSimulados.forEach(tramite => {
-                    const listItem = document.createElement('li');
-                    listItem.classList.add('admin-list-item');
-                    listItem.innerHTML = `<strong>Tipo:</strong> ${tramite.tipo} - <strong>Enviado por:</strong> ${tramite.usuario}`;
-                    tramiteList.appendChild(listItem);
-                });
-                // Actualizar la interfaz del panel de administración con la información del usuario (opcional)
-                const adminUserProfileDiv = document.getElementById('adminUserProfile');
-                const adminUserAvatarImg = document.getElementById('adminUserAvatar');
-                const adminUserNameSpan = document.getElementById('adminUserName');
-                if (adminUserProfileDiv) adminUserProfileDiv.classList.remove('hidden');
-                if (adminUserAvatarImg) adminUserAvatarImg.src = mockAdminUser.avatarUrl;
-                if (adminUserNameSpan) adminUserNameSpan.textContent = mockAdminUser.username;
-            } else {
-                accessDeniedDiv.style.display = 'block';
-                setTimeout(() => {
-                    window.location.href = '../';
-                }, 3000);
-            }
-        } else {
-            accessDeniedDiv.style.display = 'block';
-            setTimeout(() => {
-                window.location.href = '../';
-            }, 3000);
-        }
-    }
+    // Inicialización: verificar si hay un usuario logueado al cargar la página
+    const loggedInUser = getDiscordUser();
+    updateAuthUI(loggedInUser);
+    attachTramiteListeners();
 });
