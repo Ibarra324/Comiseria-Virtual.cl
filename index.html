@@ -7,67 +7,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Estilos básicos para animaciones */
-        .animate-fade-in {
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .clave-unica-btn {
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .clave-unica-btn:hover {
-            transform: scale(1.05);
-        }
-    </style>
 </head>
-<body class="animate-fade-in">
-    <header class="main-header animate-fade-in" style="animation-delay: 0.1s;">
+<body>
+    <header class="main-header">
         <div class="container">
             <div class="logo-container">
                 <a href="index.php" class="logo">
-                    <img src="logo-chile-centro-rp.png" alt="Chile Centro RolePlay">
+                    <img src="logo-comisaria.png" alt="Comisaría Virtual Chile Centro RolePlay">
                     <span>COMISARÍA VIRTUAL | Chile Centro RolePlay</span>
                 </a>
-                <div class="user-auth">
-                    <button id="loginBtn" class="btn btn-secondary"><i class="fab fa-discord"></i> Iniciar Sesión</button>
+                <div class="oficina-verde">
+                    <img src="oficina-verde.png" alt="Oficina Verde">
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#tramites">Trámites</a></li>
+                    <li><a href="admin/">Panel Administrativo</a></li>
+                </ul>
+                <div class="user-menu">
+                    <button id="loginBtn" class="login-btn">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
                     <div id="userProfile" class="user-profile hidden">
                         <img id="userAvatar" src="" alt="Avatar">
                         <span id="userName"></span>
                         <button id="logoutBtn" class="btn btn-secondary btn-small"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
                     </div>
                 </div>
-            </div>
-            <nav class="main-nav animate-fade-in" style="animation-delay: 0.2s;">
-                <ul>
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#tramites">Trámites</a></li>
-                    <li><a href="admin/">Panel Carabineros</a></li>
-                </ul>
             </nav>
         </div>
     </header>
-
-    <section class="hero-section animate-fade-in" style="animation-delay: 0.3s;">
+    <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1>Bienvenidos a la Comisaría Virtual de Chile Centro RolePlay</h1>
-                <p>En esta plataforma podrás realizar tus trámites de denuncias, constancias y reclamos de forma online.</p>
-                <p><strong>El acceso al Panel Carabineros es exclusivo para funcionarios autorizados.</strong></p>
-                <a href="#tramites" class="btn btn-primary">INICIAR MI TRÁMITE</a>
+                <h1>Bienvenidos a la Comisaría Virtual de</h1>
+                <h1 class="hero-title-rp">Chile Centro RolePlay</h1>
+                <p>En esta plataforma podrás hacer tus trámites de denuncias, constancias, reclamos y salvoconductos de forma online.</p>
+                <a href="#tramites" class="btn btn-primary btn-large">INICIA TUS TRÁMITES</a>
             </div>
             <div class="hero-image">
-                <img src="imagen-hero-chile-centro-rp.png" alt="Comisaría Virtual Chile Centro RolePlay">
+                <img src="phone-mockup.png" alt="Aplicación móvil">
             </div>
         </div>
     </section>
-
-    <section class="stats-section animate-fade-in" style="animation-delay: 0.4s;">
+    <section class="about-section" id="nosotros">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="about-label">Sobre</span>
+                    <h2 class="about-title">Nosotros</h2>
+                    <p>La Comisaría Virtual de Carabineros de Chile es una Unidad Policial, que tiene por misión entregar servicios e información a la comunidad, a través de la utilización de una plataforma digital, optimizando los procesos de atención al público, mediante la automatización de éstos.</p>
+                    <p>Fue lanzada el 11 de junio de 2019, como una plataforma digital de Carabineros de Chile para facilitar la realización de trámites sin necesidad de asistencia presencial, respondiendo a la necesidad de optimizar los servicios policiales y mejorar la accesibilidad para los ciudadanos, cumpliendo con la Política de Transformación Digital del Estado.</p>
+                    <a href="https://discord.com/invite/cf4s5Xdpue" class="btn btn-secondary">Conoce más</a>
+                </div>
+                <div class="about-image">
+                    <img src="bn_dioscar_cv.png" alt="Comisaría Virtual">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
@@ -89,27 +91,10 @@
             </div>
         </div>
     </section>
-
-    <section class="about-section animate-fade-in" id="nosotros" style="animation-delay: 0.5s;">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <span class="about-label">Sobre</span>
-                    <h2 class="about-title">Nosotros</h2>
-                    <p>La Comisaría Virtual de Chile Centro RolePlay es una plataforma para la comunidad del servidor...</p>
-                    <a href="https://discord.com/invite/tu_servidor_discord" class="btn btn-secondary">Conoce más sobre el servidor</a>
-                </div>
-                <div class="about-image">
-                    <img src="imagen-nosotros-chile-centro-rp.png" alt="Sobre Chile Centro RolePlay">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="tramites-section animate-fade-in" id="tramites" style="animation-delay: 0.6s;">
+    <section class="tramites-section" id="tramites">
         <div class="container">
             <h2 class="section-title">Trámites</h2>
-            <p class="section-subtitle">Selecciona el trámite que deseas realizar e inicia sesión con Discord para continuar.</p>
+            <p class="section-subtitle">Selecciona el trámite de preferencia, ingresa con tu Discord y proporciona la información requerida.</p>
             <div class="tramites-tabs">
                 <div class="tramites-grid">
                     <div class="tramite-card">
@@ -118,9 +103,9 @@
                         </div>
                         <div class="tramite-content">
                             <h3 class="tramite-title">HURTO SIMPLE</h3>
-                            <p class="tramite-description">Descripción del hurto simple...</p>
+                            <p class="tramite-description">Este tipo de hurto implica la apropiación de una cosa mueble ajena (un auto, una bicicleta, etc), sin la voluntad de su dueño, con ánimo de lucro y sin que concurran la violencia o intimidación en las personas ni ciertas formas de fuerza en las cosas.</p>
                             <a href="form.php?tipo=Hurto Simple" class="clave-unica-btn require-login">
-                                <i class="fas fa-key"></i> Iniciar Trámite
+                                <i class="fab fa-discord"></i> Iniciar con Discord
                             </a>
                         </div>
                     </div>
@@ -130,9 +115,9 @@
                         </div>
                         <div class="tramite-content">
                             <h3 class="tramite-title">ROBO DE VEHÍCULOS</h3>
-                            <p class="tramite-description">Descripción del robo de vehículos...</p>
+                            <p class="tramite-description">Este tipo de robo ocurre cuando una persona rompe, fuerza o abre sin autorización las puertas, ventanas u otras partes de un vehículo para apoderarse del vehiculo. No es necesario que haya contacto directo con la persona propietaria o conductora del vehículo.</p>
                             <a href="form.php?tipo=Robo de Vehiculo" class="clave-unica-btn require-login">
-                                <i class="fas fa-key"></i> Iniciar Trámite
+                                <i class="fab fa-discord"></i> Iniciar con Discord
                             </a>
                         </div>
                     </div>
@@ -142,9 +127,9 @@
                         </div>
                         <div class="tramite-content">
                             <h3 class="tramite-title">ROBO CON INTIMIDACION</h3>
-                            <p class="tramite-description">Descripción del robo con intimidación...</p>
+                            <p class="tramite-description">Este delito ocurre cuando una persona se apodera de una cosa mueble ajena con ánimo de lucro y lo hace sorprendiendo a la víctima, pero sin emplear violencia o intimidación directa. Se diferencia del robo con violencia en que, en este caso, la sustracción se realiza rápidamente, aprovechando un descuido o una oportunidad repentina, pero sin que exista una confrontación física o amenazas graves.</p>
                             <a href="form.php?tipo=Robo con Intimidacion" class="clave-unica-btn require-login">
-                                <i class="fas fa-key"></i> Iniciar Trámite
+                                <i class="fab fa-discord"></i> Iniciar con Discord
                             </a>
                         </div>
                     </div>
@@ -154,10 +139,10 @@
                         </div>
                         <div class="tramite-content">
                             <h3 class="tramite-title">ESTAFA</h3>
-                            <p class="tramite-description">Descripción de la estafa...</p>
-                            <p class="tramite-warning">Nota sobre la estafa...</p>
+                            <p class="tramite-description">Este delito ocurre cuando una persona, a través de engaños o trucos, hace que otra persona le entregue dinero o bienes, con la intención de aprovecharse de la confianza o buena fe de la víctima. El estafador utiliza medios fraudulentos para hacer que la víctima realice un acto que le cause un perjuicio económico.</p>
+                            <p class="tramite-warning">Esta denuncia NO corresponde al uso fraudulento de tarjeta de crédito o débito (Ley 20.009), la cual se debe realizar de forma presencial en una unidad policial.</p>
                             <a href="form.php?tipo=Estafa" class="clave-unica-btn require-login">
-                                <i class="fas fa-key"></i> Iniciar Trámite
+                                <i class="fab fa-discord"></i> Iniciar con Discord
                             </a>
                         </div>
                     </div>
@@ -167,9 +152,9 @@
                         </div>
                         <div class="tramite-content">
                             <h3 class="tramite-title">CRIMEN ORGANIZADO</h3>
-                            <p class="tramite-description">Descripción del crimen organizado...</p>
+                            <p class="tramite-description">Este módulo de "Crimen Organizado" tiene por finalidad que usted pueda entregar información anónima relacionada a Tenencia ilegal de arma de fuego, Robos, Homicidios y Secuestros.</p>
                             <a href="form.php?tipo=Crimen Organizado" class="clave-unica-btn require-login">
-                                <i class="fas fa-key"></i> Iniciar Trámite
+                                <i class="fab fa-discord"></i> Iniciar con Discord
                             </a>
                         </div>
                     </div>
@@ -179,9 +164,9 @@
                         </div>
                         <div class="tramite-content">
                             <h3 class="tramite-title">RECLAMOS Y FELICITACIONES AL ACTUAR POLICIAL</h3>
-                            <p class="tramite-description">Descripción de reclamos y felicitaciones...</p>
-                            <a href="form.php?tipo=RECLAMOS Y FELICITACIONES AL ACTUAR POLICIAL" class="clave-unica-btn require-login">
-                                <i class="fas fa-key"></i> Iniciar Trámite
+                            <p class="tramite-description">Este módulo tiene por finalidad que usted pueda reportar conductas indebidas o bien felicitar la acción de parte de funcionarios de Carabineros.</p>
+                            <a href="form.php?tipo=Reclamos y Felicitaciones" class="clave-unica-btn require-login">
+                                <i class="fab fa-discord"></i> Iniciar con Discord
                             </a>
                         </div>
                     </div>
@@ -189,11 +174,6 @@
             </div>
         </div>
     </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
     <script src="script.js"></script>
 </body>
 </html>
