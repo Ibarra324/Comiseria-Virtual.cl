@@ -1,4 +1,4 @@
-/* Estilos básicos de emergencia - Se mantienen los estilos que proporcionaste con algunos ajustes */
+/* Estilos básicos */
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
@@ -23,42 +23,35 @@ body {
 .main-header {
     background-color: white;
     padding: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo-container {
+.logo {
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: #333;
 }
 
-.user-auth {
-    display: flex;
-    align-items: center;
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.user-profile img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.logo img {
+    height: 40px;
     margin-right: 10px;
 }
 
-.user-profile span {
-    font-weight: bold;
-    margin-right: 10px;
+.oficina-verde img {
+    height: 40px;
 }
 
-.user-profile.hidden {
-    display: none;
+.main-nav {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
 }
 
 .main-nav ul {
@@ -72,11 +65,15 @@ body {
     margin-right: 20px;
 }
 
+.main-nav li:last-child {
+    margin-right: 0;
+}
+
 .main-nav a {
     color: #333;
     text-decoration: none;
     font-weight: 500;
-    padding: 5px 10px;
+    padding: 8px 15px;
     border-radius: 4px;
     transition: color 0.3s ease;
 }
@@ -90,6 +87,43 @@ body {
     color: white;
 }
 
+.user-menu {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.login-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #007bff;
+    outline: none;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.user-profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.user-profile span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.user-profile.hidden {
+    display: none;
+}
+
 .btn {
     display: inline-block;
     padding: 12px 25px;
@@ -98,7 +132,6 @@ body {
     text-transform: uppercase;
     border: none;
     cursor: pointer;
-    margin-left: 10px; /* Espacio entre botones */
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
@@ -129,26 +162,38 @@ body {
     font-size: 0.9rem;
 }
 
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
 .hero-section {
-    background-color: #e9ecef;
+    background-color: #f8f9fa;
     padding: 80px 0;
     text-align: center;
 }
 
 .hero-content {
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto;
 }
 
 .hero-content h1 {
     font-size: 2.5rem;
-    color: #006837;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.hero-title-rp {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #28a745;
     margin-bottom: 20px;
 }
 
 .hero-content p {
     font-size: 1.1rem;
-    color: #555;
+    color: #6c757d;
     margin-bottom: 30px;
 }
 
@@ -191,152 +236,3 @@ body {
 
 .about-image {
     flex: 1;
-    text-align: center;
-}
-
-.about-image img {
-    max-width: 80%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.stats-section {
-    padding: 40px 0;
-    background-color: #e9ecef;
-    text-align: center;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    max-width: 900px;
-    margin: 20px auto 0;
-}
-
-.stat-item {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.stat-item:hover {
-    transform: translateY(-3px);
-}
-
-.stat-item h2 {
-    font-size: 2rem;
-    color: #007bff;
-    margin-bottom: 5px;
-}
-
-.stat-item p {
-    font-size: 1.1rem;
-    color: #555;
-}
-
-.tramites-section {
-    padding: 60px 0;
-    background-color: white;
-    text-align: center;
-}
-
-.section-title {
-    font-size: 2rem;
-    color: #006837;
-    margin-bottom: 10px;
-}
-
-.section-subtitle {
-    color: #555;
-    margin-bottom: 30px;
-}
-
-.tramites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-}
-
-.tramite-card {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #006837;
-    transition: transform 0.3s ease-in-out;
-    text-align: left;
-}
-
-.tramite-card:hover {
-    transform: translateY(-5px);
-}
-
-.tramite-icon {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f5f5f5;
-    border-radius: 8px 8px 0 0;
-    font-size: 2rem;
-    color: #006837;
-}
-
-.tramite-content {
-    padding: 20px;
-}
-
-.tramite-title {
-    font-size: 1.2rem;
-    color: #006837;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.tramite-description {
-    color: #555;
-    font-size: 0.95rem;
-    margin-bottom: 15px;
-}
-
-.tramite-warning {
-    color: #dc3545;
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
-
-.clave-unica-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 4px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-}
-
-.clave-unica-btn i {
-    margin-right: 8px;
-}
-
-.clave-unica-btn:hover {
-    transform: scale(1.05);
-    background-color: #004494;
-}
-
-.clave-unica-btn.clicked {
-    background-color: #00aaff; /* Un color diferente al hacer clic */
-    transform: scale(1.1); /* Un pequeño aumento de tamaño */
-    transition: background-color 0.1s ease, transform 0.1s ease;
-}
