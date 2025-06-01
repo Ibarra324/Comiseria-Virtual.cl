@@ -3,65 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Panel Administrativo - Carabineros</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 30px auto;
-      background: #e6f0ff;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    h1 {
-      color: #003366;
-      text-align: center;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #003366;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #003366;
-      color: white;
-    }
-  </style>
+  <title>Comisaría Virtual RP</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Panel Administrativo - Carabineros</h1>
+  <h1>Comisaría Virtual RP</h1>
+  <form id="tramiteForm">
+    <label>Nombre:</label><br />
+    <input type="text" id="nombre" required /><br />
 
-  <script>
-    // Pedir ID de carabinero para entrar
-    const adminID = prompt("Ingresa tu ID de Carabinero:");
-    if(adminID !== "1337"){
-      alert("Acceso denegado");
-      window.location.href = "../index.html";
-    }
+    <label>ID Carabinero o RUT RP:</label><br />
+    <input type="text" id="rut" required /><br />
 
-    // Mostrar solicitudes
-    let solicitudes = JSON.parse(localStorage.getItem("solicitudes") || "[]");
-    if(solicitudes.length === 0){
-      document.write("<p>No hay solicitudes por ahora.</p>");
-    } else {
-      let tabla = "<table><thead><tr><th>Nombre</th><th>ID/RUT</th><th>Trámite</th><th>Descripción</th><th>Fecha</th></tr></thead><tbody>";
-      solicitudes.forEach(s => {
-        tabla += `<tr>
-          <td>${s.nombre}</td>
-          <td>${s.rut}</td>
-          <td>${s.tramite}</td>
-          <td>${s.descripcion}</td>
-          <td>${s.fecha}</td>
-        </tr>`;
-      });
-      tabla += "</tbody></table>";
-      document.write(tabla);
-    }
+    <label>Tipo de trámite:</label><br />
+    <select id="tramite" required>
+      <option value="">--Seleccione--</option>
+      <option value="extravío">Constancia de extravío</option>
+      <option value="permiso">Permiso especial</option>
+      <option value="denuncia">Denuncia</option>
+    </select><br />
+
+    <label>Descripción:</label><br />
+    <textarea id="descripcion" rows="4" required></textarea><br />
+
+    <button type="submit">Enviar solicitud</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
   </script>
 </body>
 </html>
