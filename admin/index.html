@@ -1,80 +1,95 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrativo | Chile Centro RolePlay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
-    <style>
-        /* Estilos adicionales específicos para esta página */
-        body {
-            background-color: #e9ecef;
-        }
-        .admin-container {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .admin-header {
-            text-align: center;
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .admin-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .admin-access-denied {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo | Chile Centro RolePlay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Estilos adicionales específicos para esta página */
+        body {
+            background-color: #e9ecef;
+        }
+        .admin-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .admin-header {
+            text-align: center;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        .admin-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .admin-access-denied {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
 </head>
 <body>
-    <div class="admin-container">
-        <h1 class="admin-header">Panel Administrativo</h1>
-        <div id="accessDenied" class="admin-message admin-access-denied" style="display:none;">
-            <strong>Acceso Denegado:</strong> No tienes los permisos necesarios para acceder a este panel. Serás redirigido en breve.
-        </div>
-        <div id="adminContent" style="display:none;">
-            <p class="admin-message">Bienvenido al panel administrativo de <strong>Chile Centro RolePlay</strong>.</p>
-            <p>Aquí podrás gestionar las denuncias y otras funcionalidades.</p>
-            </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const accessDeniedDiv = document.getElementById('accessDenied');
-            const adminContentDiv = document.getElementById('adminContent');
+    <div class="admin-container">
+        <h1 class="admin-header">Panel Administrativo</h1>
+        <div id="accessDenied" class="admin-message admin-access-denied" style="display:none;">
+            <strong>Acceso Denegado:</strong> No tienes los permisos necesarios para acceder a este panel. Serás redirigido en breve.
+        </div>
+        <div id="adminContent" style="display:none;">
+            <p class="admin-message">Bienvenido al panel administrativo de <strong>Chile Centro RolePlay</strong>.</p>
+            <p>Aquí podrás gestionar las denuncias y otras funcionalidades.</p>
+            </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accessDeniedDiv = document.getElementById('accessDenied');
+            const adminContentDiv = document.getElementById('adminContent');
 
-            // Simulación de verificación de rol de administrador (con localStorage)
-            const loggedInUser = localStorage.getItem('discordUser');
-            if (loggedInUser) {
-                const user = JSON.parse(loggedInUser);
-                // Aquí podrías verificar si el usuario tiene un rol específico (ej: 'admin')
-                if (user && user.roles && user.roles.includes('admin')) {
-                    adminContentDiv.style.display = 'block';
-                } else {
-                    accessDeniedDiv.style.display = 'block';
-                    setTimeout(() => {
-                        window.location.href = '../';
-                    }, 3000);
-                }
-            } else {
-                accessDeniedDiv.style.display = 'block';
-                setTimeout(() => {
-                    window.location.href = '../';
-                }, 3000);
-            }
-        });
-    </script>
+            // Intenta obtener la información del usuario de Discord desde localStorage
+            const loggedInUser = localStorage.getItem('discordUser');
+            console.log('Información del usuario desde localStorage:', loggedInUser); // Para depuración
+
+            if (loggedInUser) {
+                try {
+                    const user = JSON.parse(loggedInUser);
+                    console.log('Objeto de usuario parseado:', user); // Para depuración
+
+                    // Verifica si el objeto de usuario existe, tiene la propiedad 'roles' y si incluye 'admin'
+                    if (user && user.roles && Array.isArray(user.roles) && user.roles.includes('admin')) {
+                        console.log('Rol de administrador encontrado. Mostrando contenido.'); // Para depuración
+                        adminContentDiv.style.display = 'block';
+                    } else {
+                        console.log('Rol de administrador no encontrado o estructura incorrecta.'); // Para depuración
+                        accessDeniedDiv.style.display = 'block';
+                        setTimeout(() => {
+                            window.location.href = '../';
+                        }, 3000);
+                    }
+                } catch (error) {
+                    console.error('Error al parsear la información del usuario:', error); // Para depuración
+                    accessDeniedDiv.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = '../';
+                    }, 3000);
+                }
+            } else {
+                console.log('No se encontró información del usuario en localStorage.'); // Para depuración
+                accessDeniedDiv.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '../';
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
