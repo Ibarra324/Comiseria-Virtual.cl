@@ -1,1 +1,60 @@
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Comisaría Virtual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-container">
+                <a href="index.php" class="logo">
+                    <img src="logo-comisaria.png" alt="Comisaría Virtual">
+                    <span>COMISARÍA VIRTUAL</span>
+                </a>
+                <div class="oficina-verde">
+                    <img src="oficina-verde.png" alt="Oficina Verde">
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                        <li><a href="index.php">Inicio</a></li>
+                        <li><a href="index.php#nosotros">Nosotros</a></li>
+                        <li><a href="index.php#tramites">Trámites</a></li>
+                        <li><a href="admin/index.php">Panel Administrativo</a></li>
+                </ul>
+                <div class="user-menu">
+                    <a href="login.php" class="login-btn active">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="login-section">
+        <div class="container">
+            <div class="login-card">
+                <div class="login-header">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Para realizar trámites en Comisaría Virtual, debes iniciar sesión con tu cuenta de Discord.</p>
+                </div>
+                <div class="login-body">
+                        <img src="logo-comisaria.png" alt="Comisaría Virtual">
+                    </div>
+                    <p class="login-text">Al iniciar sesión, podrás acceder a todos los servicios de la plataforma, como realizar denuncias, solicitar constancias y más.</p>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1377883012552986726&response_type=code&redirect_uri=https%3A%2F%2Fibarra324.github.io%2FComiseria-Virtual.cl%2F&scope=identify+guilds+email" class="discord-login-btn">
+                        <i class="fab fa-discord"></i> Iniciar sesión con Discord
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl508723'},{'dcenter':'p3'},{'cp_id':'10203747'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>
