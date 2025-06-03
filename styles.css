@@ -2379,6 +2379,21 @@ html {
   transition: transform 0.3s ease;
 }
 
+        /* Estilos adicionales para el avatar */
+        .user-avatar {
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
 .gallery-item:hover .gallery-icon {
   transform: scale(1);
 }
