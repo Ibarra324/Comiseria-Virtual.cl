@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const salvoconductoCountElement = document.getElementById('salvoconductoCount');
     const panelCarabineroLink = document.getElementById('panelCarabineroLink');
     const requireAuthLinks = document.querySelectorAll('.require-auth');
-    const discordAuthUrl = "https://discord.com/oauth2/authorize?client_id=1299098578836521041&redirect_uri=http%3A%2F%2Ft78.8c4.mytemp.website%2Fcomisaria_virtual%2Fcomisaria_callback.php&response_type=code&scope=identify";
-    const carabineroRoleId = 'TU_ID_DE_ROL_DE_CARABINERO'; // Reemplaza con el ID real del rol de Carabinero en Discord
+    const discordAuthUrl = "https://discord.com/oauth2/authorize?client_id=1377883012552986726&response_type=code&redirect_uri=https%3A%2F%2Fibarra324.github.io%2FComiseria-Virtual.cl%2F&scope=identify+guilds+email";
+    const carabineroRoleId = '1367633183704875094'; // Reemplaza con el ID real del rol de Carabinero en Discord
 
     // Función para obtener datos desde localStorage
     function getData(key) {
