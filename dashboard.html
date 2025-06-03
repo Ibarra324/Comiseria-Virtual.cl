@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Comisaría Virtual</title>
+    <title>Mi Dashboard - Comisaría Virtual</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+</head>
 <body>
     <header class="main-header">
         <div class="container">
             <div class="logo-container">
-                <a href="index.html" class="logo">
+                <a href="index.php" class="logo">
                     <img src="logo-comisaria.png" alt="Comisaría Virtual">
                     <span>COMISARÍA VIRTUAL</span>
                 </a>
@@ -21,46 +22,230 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="index.html#nosotros">Nosotros</a></li>
-                        <li><a href="index.html#tramites">Trámites</a></li>
-                        <li><a href="admin/index.html">Panel Administrativo</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#tramites">Trámites</a></li>
+                    <li><a href="admin/index.html">Panel Administrativo</a></li>
                 </ul>
                 <div class="user-menu">
-                    <a href="login.html" class="login-btn active">
-                        <i class="fas fa-user-circle"></i>
+                    <a href="dashboard.html" class="user-avatar active" id="discord-avatar-link">
+                        <img src="" alt="Avatar de Discord" id="discord-avatar">
                     </a>
                 </div>
             </nav>
         </div>
     </header>
 
-                    <div class="user-menu">
-                                        <a href="dashboard.html" class="user-avatar">
-                        <img src="https://cdn.discordapp.com/avatars/1307723610151981167/05c4c154ed75b2e0451eaa7946136e37.png" alt="23.945">
-                    </a>
-                                    </div>
-            </nav>
-        </div>
-    </header>
-
-    <section class="login-section">
+    <section class="page-header">
         <div class="container">
-            <div class="login-card">
-                <div class="login-header">
-                    <h2>Iniciar Sesión</h2>
-                    <p>Para realizar trámites en Comisaría Virtual, debes iniciar sesión con tu cuenta de Discord.</p>
-                </div>
-                <div class="login-body">
-                        <img src="logo-comisaria.png" alt="Comisaría Virtual">
+            <h1 id="dashboard-title">Mi Dashboard</h1>
+            <p><span id="welcome-message">Bienvenido</span>. Aquí puedes ver el estado de tus trámites.</p>
+        </div>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <p class="login-text">Al iniciar sesión, podrás acceder a todos los servicios de la plataforma, como realizar denuncias, solicitar constancias y más.</p>
-                    <a href="https://discord.com/oauth2/authorize?client_id=1377883012552986726&response_type=code&redirect_uri=https%3A%2F%2Fibarra324.github.io%2FComiseria-Virtual.cl%2F&scope=identify+guilds+email" class="discord-login-btn">
-                        <i class="fab fa-discord"></i> Iniciar sesión con Discord
-                    </a>
+                    <div class="stat-content">
+                        <div class="stat-number" id="pending-count">0</div>
+                        <div class="stat-label">Pendientes</div>
+                    </div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-icon accepted">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="accepted-count">0</div>
+                        <div class="stat-label">Aceptados</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon rejected">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="rejected-count">0</div>
+                        <div class="stat-label">Rechazados</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon total">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="total-count">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-tabs">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="todos">
+                        <i class="fas fa-list"></i> Todos
+                        <span class="tab-badge" id="todos-badge">0</span>
+                    </button>
+                    <button class="tab-btn" data-tab="pendientes">
+                        <i class="fas fa-clock"></i> Pendientes
+                        <span class="tab-badge" id="pendientes-badge">0</span>
+                    </button>
+                    <button class="tab-btn" data-tab="aceptados">
+                        <i class="fas fa-check-circle"></i> Aceptados
+                        <span class="tab-badge" id="aceptados-badge">0</span>
+                    </button>
+                    <button class="tab-btn" data-tab="rechazados">
+                        <i class="fas fa-times-circle"></i> Rechazados
+                        <span class="tab-badge" id="rechazados-badge">0</span>
+                    </button>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab-content active" id="todos">
+                        <div class="empty-state" id="empty-todos">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>No tienes trámites</h3>
+                            <p>Aún no has realizado ningún trámite. Puedes iniciar uno nuevo desde la sección de Trámites.</p>
+                            <a href="index.php#tramites" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo Trámite
+                            </a>
+                        </div>
+                        <div id="tramites-list-todos">
+                            </div>
+                    </div>
+
+                    <div class="tab-content" id="pendientes">
+                        <div class="empty-state" id="empty-pendientes">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>No tienes trámites pendientes</h3>
+                            <p>No tienes trámites en estado pendiente. Puedes iniciar uno nuevo desde la sección de Trámites.</p>
+                            <a href="index.php#tramites" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo Trámite
+                            </a>
+                        </div>
+                        <div id="tramites-list-pendientes">
+                            </div>
+                    </div>
+
+                    <div class="tab-content" id="aceptados">
+                        <div class="empty-state" id="empty-aceptados">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>No tienes trámites aceptados</h3>
+                            <p>No tienes trámites en estado aceptado. Puedes iniciar uno nuevo desde la sección de Trámites.</p>
+                            <a href="index.php#tramites" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo Trámite
+                            </a>
+                        </div>
+                        <div id="tramites-list-aceptados">
+                            </div>
+                    </div>
+
+                    <div class="tab-content" id="rechazados">
+                        <div class="empty-state" id="empty-rechazados">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <h3>No tienes trámites rechazados</h3>
+                            <p>No tienes trámites en estado rechazado. Puedes iniciar uno nuevo desde la sección de Trámites.</p>
+                            <a href="index.php#tramites" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo Trámite
+                            </a>
+                        </div>
+                        <div id="tramites-list-rechazados">
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-actions">
+                <a href="index.php#tramites" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nuevo Trámite
+                </a>
+                <a href="logout.php" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const discordAvatarImg = document.getElementById('discord-avatar');
+            const discordAvatarLink = document.getElementById('discord-avatar-link');
+            const dashboardTitle = document.getElementById('dashboard-title');
+            const welcomeMessage = document.getElementById('welcome-message');
+
+            // Intenta obtener la información del usuario de Discord desde localStorage
+            const loggedInUser = localStorage.getItem('discordUser');
+
+            if (loggedInUser) {
+                try {
+                    const user = JSON.parse(loggedInUser);
+                    console.log('Información del usuario desde localStorage:', user);
+
+                    // Verificar si hay un avatar y mostrarlo
+                    if (user && user.avatar) {
+                        const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
+                        discordAvatarImg.src = avatarUrl;
+                        discordAvatarLink.href = `https://discord.com/users/${user.id}`; // O la URL de perfil que desees
+                        discordAvatarImg.style.display = 'block';
+                    } else {
+                        // Mostrar un avatar por defecto si no hay información
+                        discordAvatarImg.src = 'img/default-avatar.png'; // Reemplaza con tu imagen por defecto
+                        discordAvatarLink.href = '#'; // O una URL por defecto
+                        discordAvatarImg.style.display = 'block';
+                    }
+
+                    // Mostrar el nombre de usuario en el dashboard
+                    if (user && user.username) {
+                        dashboardTitle.textContent = `Mi Dashboard - ${user.username}`;
+                        welcomeMessage.textContent = `Bienvenido, ${user.username}`;
+                    } else {
+                        // Mostrar un mensaje genérico si no hay nombre de usuario
+                        welcomeMessage.textContent = 'Bienvenido';
+                    }
+
+                    // Aquí puedes agregar la lógica para cargar los trámites del usuario
+                    // y actualizar los contadores y la lista de trámites.
+                    // Esto requerirá interactuar con un backend (que no está incluido en este HTML).
+
+                } catch (error) {
+                    console.error('Error al parsear la información del usuario:', error);
+                    // Manejar el error (por ejemplo, mostrar un mensaje de error al usuario)
+                    welcomeMessage.textContent = 'Bienvenido (error al cargar datos)';
+                }
+            } else {
+                // Si no hay usuario logueado, redirigir a la página de inicio de sesión
+                window.location.href = 'login.php';
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+
+                    // Aquí puedes agregar lógica para filtrar la lista de trámites
+                    // según la pestaña seleccionada (si tienes los datos cargados).
+                });
+            });
+        });
+    </script>
 </body>
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl508723'},{'dcenter':'p3'},{'cp_id':'10203747'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl508723'},{'dcenter':'p3'},{'cp_id':'10203747'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>
+</html>
