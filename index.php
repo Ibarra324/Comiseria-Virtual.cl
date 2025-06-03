@@ -23,10 +23,10 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.php">Inicio</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#tramites">Trámites</a></li>
-                    <li><a href="admin/index.html">Panel de Carabinero</a></li>
+                    <li><a href="admin/index.php">Panel de Carabinero</a></li>
           </ul>
 
                 <div class="user-menu">
