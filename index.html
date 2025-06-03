@@ -25,16 +25,21 @@
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#tramites">Trámites</a></li>
-                    <li><a href="#" id="panelCarabineroLink">Panel de Carabinero</a></li>
+                    <li><a href="admin/index.html">Panel de Carabinero</a></li>
                 </ul>
-                <div class="user-menu">
-                    <a href="https://discord.com/oauth2/authorize?client_id=1377883012552986726&response_type=code&redirect_uri=https%3A%2F%2Fibarra324.github.io%2FComiseria-Virtual.cl%2F&scope=identify+guilds+email" class="login-btn">
-                        <i class="fas fa-user-circle"></i>
-                    </a>
-                </div>
-            </nav>
-        </div>
-    </header>
+              <div class="user-menu">
+                                        <a href="https://discord.com/oauth2/authorize?client_id=1377883012552986726&response_type=code&redirect_uri=https%3A%2F%2Fibarra324.github.io%2FComiseria-Virtual.cl%2F&scope=identify+guilds+email" class="login-btn" id="loginButton">
+                        <i class="fas fa-user-circle"></i> Iniciar Sesión
+                    </a>
+                                        <div id="userProfile" style="display: none;">
+                        <a href="dashboard.php" class="user-avatar">
+                            <img src="" alt="Avatar" id="userAvatar">
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <section class="hero-section">
         <div class="container">
